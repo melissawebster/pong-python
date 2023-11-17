@@ -46,7 +46,4 @@ class Game:
             pygame.display.update()
  
 
-    def move_player1_up(self):
-        self.player1.rect[1] -= 8
-
 Game().update()
