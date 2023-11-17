@@ -2,7 +2,7 @@ import pygame
 
 
 class Obj:
-    
+
     def __init__(self, image, x, y):
         self.image = pygame.image.load(image)
         self.rect = self.image.get_rect()
@@ -11,3 +11,9 @@ class Obj:
 
     def draw(self, window):
         window.blit(self.image, (self.rect[0], self.rect[1]))
+
+    def move_up(self):
+        self.rect[1] -= 8
+
+    def move_down(self):
+        self.rect[1] += 8
