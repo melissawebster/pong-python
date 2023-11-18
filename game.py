@@ -28,10 +28,33 @@ class Game:
                 self.running = False
             
             if event.type == pygame.KEYDOWN:
+                #Player1
                 if event.key == pygame.K_q:
+                    self.player1.move_up_bool = True
                     self.player1.move_up()
                 if event.key == pygame.K_a:
+                    self.player1.move_down_bool = True
                     self.player1.move_down()
+                #Player2
+                if event.key == pygame.K_UP:
+                    self.player2.move_up_bool = True
+                    self.player2.move_up()
+                if event.key == pygame.K_DOWN:
+                    self.player2.move_down_bool = True
+                    self.player2.move_down()
+            
+            if event.type == pygame.KEYUP:
+                #Player1
+                if event.key == pygame.K_q:
+                    self.player1.move_up_bool = False
+                if event.key == pygame.K_a:
+                    self.player1.move_down_bool = False
+                #Player2
+                if event.key == pygame.K_UP:
+                    self.player2.move_up_bool = False
+                if event.key == pygame.K_DOWN:
+                    self.player2.move_down_bool = False
+
     
     def update(self):
         while self.running:
@@ -39,8 +62,15 @@ class Game:
 
             #Obj draws
             self.bg.draw(self.window.window)
+
             self.player1.draw(self.window.window)
+            self.player1.move_up()
+            self.player1.move_down()
+
             self.player2.draw(self.window.window)
+            self.player2.move_up()
+            self.player2.move_down()
+
             self.ball.draw(self.window.window)
 
             pygame.display.update()
