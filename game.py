@@ -9,14 +9,16 @@ class Display:
 
 class Obj:
 
-    def __init__(self, image, x, y):
+    def __init__(self, image, x, y, game):
         self.image = pygame.image.load(image)
         self.rect = self.image.get_rect()
         self.rect[0] = x
         self.rect[1] = y
+
+        self.game = game
         self.move_player_up_bool = False
         self.move_player_down_bool = False
-        self.ball_dir_x = -7
+        self.ball_dir_x = -3
         self.ball_dir_y = -1
 
     def draw(self, window):
@@ -35,11 +37,22 @@ class Obj:
                 self.rect[1] = 566
 
     def move_ball(self):
-        # from game import Game
-        # self.rect[0] += self.ball_dir_x
-        # self.rect[1] += self.ball_dir_y
-        # if self.rect[0] < 130:
-            pass
+        self.rect[0] += self.ball_dir_x
+        self.rect[1] += self.ball_dir_y
+        #ball hits player and switches position
+        if self.rect[0] < 80:
+            if self.game.player1.rect[1] < self.rect[1] + 23 and self.game.player1.rect[1] + 146 > self.rect[1]:
+                self.ball_dir_x *= -1
+            else:
+                pass #call score function
+        if self.rect[0] > 1110:
+            if self.game.player2.rect[1] < self.rect[1] + 23 and self.game.player2.rect[1] + 146 > self.rect[1]:
+                self.ball_dir_x *= -1
+            else:
+                pass #call score function
+        #ball hits top/bottom and switches position
+        if self.rect[1] < 0 or self.rect[1] > 674:
+            self.ball_dir_y *= -1
 
 class Game:
 
@@ -48,10 +61,10 @@ class Game:
         self.running = True
         self.window = Display(1280, 720, 'Pong Python')
 
-        self.bg = Obj("assets/field.png", 0, 0)
-        self.player1 = Obj("assets/player1.png", 50, 300)
-        self.player2 = Obj("assets/player2.png", 1150, 300)
-        self.ball = Obj("assets/ball.png", 616, 340)
+        self.bg = Obj("assets/field.png", 0, 0, self)
+        self.player1 = Obj("assets/player1.png", 50, 300, self)
+        self.player2 = Obj("assets/player2.png", 1150, 300, self)
+        self.ball = Obj("assets/ball.png", 616, 340, self)
 
 
     def events(self):
