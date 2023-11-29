@@ -35,10 +35,10 @@ class Obj:
                 self.rect[1] = 566
 
     def move_ball(self):
-        from game import Game
-        self.rect[0] += self.ball_dir_x
-        self.rect[1] += self.ball_dir_y
-        if self.rect[0] < 130:
+        # from game import Game
+        # self.rect[0] += self.ball_dir_x
+        # self.rect[1] += self.ball_dir_y
+        # if self.rect[0] < 130:
             pass
 
 class Game:
